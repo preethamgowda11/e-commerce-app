@@ -14,11 +14,11 @@ export default function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/"        element={<Products />} />
-          <Route path="/login"   element={<Login />} />
-          <Route path="/register"element={<Register />} />
+          <Route path="/"            element={<Products />} />
+          <Route path="/login"       element={<Login />} />
+          <Route path="/register"    element={<Register />} />
           <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/admin" element={
+          <Route path="/admin"       element={
             <ProtectedRoute adminOnly><Admin /></ProtectedRoute>
           } />
         </Routes>

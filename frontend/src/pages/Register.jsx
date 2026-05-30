@@ -20,26 +20,33 @@ export default function Register() {
   };
 
   return (
-    <div style={{ minHeight:'80vh', display:'flex', alignItems:'center', justifyContent:'center', background:'#f7f8fa' }}>
+    <div style={{ minHeight:'80vh', display:'flex', alignItems:'center',
+      justifyContent:'center', background:'#f7f8fa' }}>
       <div style={{ background:'#fff', padding:'40px', borderRadius:'12px',
         boxShadow:'0 2px 12px rgba(0,0,0,0.1)', width:'100%', maxWidth:'400px' }}>
         <h2 style={{ marginBottom:'24px', textAlign:'center' }}>Create Account</h2>
-        {error && <div style={{ background:'#fee2e2', color:'#b91c1c', padding:'10px',
-          borderRadius:'6px', marginBottom:'16px' }}>{error}</div>}
+        {error && (
+          <div style={{ background:'#fee2e2', color:'#b91c1c', padding:'10px',
+            borderRadius:'6px', marginBottom:'16px' }}>{error}</div>
+        )}
         <form onSubmit={handleSubmit}>
-          {['name','email','password'].map(field => (
-            <div key={field} style={{ marginBottom:'16px' }}>
-              <label style={{ display:'block', marginBottom:'6px', fontWeight:'500', textTransform:'capitalize' }}>{field}</label>
-              <input type={field === 'password' ? 'password' : field === 'email' ? 'email' : 'text'}
-                value={form[field]} required
-                onChange={e => setForm({...form, [field]: e.target.value})}
+          {[
+            { key:'name', label:'Name', type:'text' },
+            { key:'email', label:'Email', type:'email' },
+            { key:'password', label:'Password', type:'password' },
+          ].map(f => (
+            <div key={f.key} style={{ marginBottom:'16px' }}>
+              <label style={{ display:'block', marginBottom:'6px', fontWeight:'500' }}>{f.label}</label>
+              <input type={f.type} value={form[f.key]} required
+                onChange={e => setForm({...form, [f.key]: e.target.value})}
                 style={{ width:'100%', padding:'10px', border:'1px solid #ddd',
-                  borderRadius:'6px', fontSize:'14px', boxSizing:'border-box' }} />
+                  borderRadius:'6px', fontSize:'14px' }} />
             </div>
           ))}
           <button type="submit" disabled={loading}
             style={{ width:'100%', padding:'12px', background:'#4f46e5', color:'#fff',
-              border:'none', borderRadius:'6px', fontSize:'15px', cursor:'pointer', fontWeight:'500', marginTop:'8px' }}>
+              border:'none', borderRadius:'6px', fontSize:'15px',
+              cursor:'pointer', fontWeight:'500', marginTop:'8px' }}>
             {loading ? 'Creating...' : 'Register'}
           </button>
         </form>
